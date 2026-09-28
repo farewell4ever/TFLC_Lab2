@@ -268,8 +268,18 @@ public partial class MainForm : Form
                 row.DefaultCellStyle.ForeColor = Color.FromArgb(200, 30, 30);
         }
 
-        outputGrid.ClearSelection();
         var errors = lexemes.Count(l => l.IsError);
+        var summaryIndex = outputGrid.Rows.Add(
+            "", $"Всего лексем: {lexemes.Count}",
+            errors == 0 ? "Ошибок не обнаружено" : $"Недопустимых символов: {errors}", "");
+        var summary = outputGrid.Rows[summaryIndex].DefaultCellStyle;
+        summary.BackColor = SystemColors.Control;
+        summary.SelectionBackColor = SystemColors.Control;
+        summary.SelectionForeColor = errors == 0 ? Color.FromArgb(30, 120, 50) : Color.FromArgb(200, 30, 30);
+        summary.ForeColor = summary.SelectionForeColor;
+        summary.Font = new Font(outputGrid.Font, FontStyle.Bold);
+
+        outputGrid.ClearSelection();
         SetStatus(errors == 0
             ? $"Лексический анализ завершён: лексем — {lexemes.Count}, ошибок нет"
             : $"Лексический анализ завершён: лексем — {lexemes.Count}, недопустимых символов — {errors}");
