@@ -10,8 +10,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Элементы решен
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LangProcessor.Tests", "LangProcessor.Tests\LangProcessor.Tests.csproj", "{1CD82A4B-FFFA-4B16-9CD5-EF190FB41FA1}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,9 +23,5 @@ Global
 		{CEB27021-9024-4DD6-99B6-04147E4FC1F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CEB27021-9024-4DD6-99B6-04147E4FC1F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CEB27021-9024-4DD6-99B6-04147E4FC1F1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1CD82A4B-FFFA-4B16-9CD5-EF190FB41FA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1CD82A4B-FFFA-4B16-9CD5-EF190FB41FA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1CD82A4B-FFFA-4B16-9CD5-EF190FB41FA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1CD82A4B-FFFA-4B16-9CD5-EF190FB41FA1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

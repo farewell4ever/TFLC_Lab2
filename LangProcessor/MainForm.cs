@@ -309,8 +309,9 @@ public partial class MainForm : Form
 
     private void OnTextSection(object? sender, EventArgs e)
     {
-        var title = (sender as ToolStripItem)?.Text ?? "";
-        InfoForm.Show(this, title, Array.Empty<(string, string)>(), new Size(640, 480));
+        var item = sender as ToolStripItem;
+        var sections = HelpContent.TextSection(item?.Tag as string ?? "");
+        InfoForm.Show(this, item?.Text ?? "", sections, new Size(720, 600));
     }
 
     private void OnHelp(object? sender, EventArgs e) =>
