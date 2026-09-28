@@ -1,4 +1,4 @@
-using System.Text;
+﻿using System.Text;
 
 namespace LangProcessor;
 
@@ -12,6 +12,7 @@ public partial class MainForm : Form
         "Все файлы (*.*)|*.*";
 
     private readonly LineNumberPanel _lineNumbers;
+    private readonly Scanner _scanner = new();
     private string? _filePath;
     private string _savedText = "";
     private float _fontSize = DefaultFontSize;
@@ -213,7 +214,7 @@ public partial class MainForm : Form
 
     private void OnCopy(object? sender, EventArgs e)
     {
-        if (outputGrid.Focused && outputGrid.CurrentRow?.Tag is Lexeme l)
+        if (outputGrid.Focused && outputGrid.CurrentRow?.Tag is Token l)
         {
             Clipboard.SetText($"{l.CodeText}\t{l.Type}\t{l.Text}\t{l.Location}");
             return;
@@ -256,7 +257,7 @@ public partial class MainForm : Form
     private void OnRun(object? sender, EventArgs e)
     {
         ClearResults();
-        var lexemes = Lexer.Scan(codeEditor.CurrentText);
+        var lexemes = _scanner.Analyze(codeEditor.CurrentText);
 
         foreach (var lexeme in lexemes)
         {
@@ -276,18 +277,18 @@ public partial class MainForm : Form
 
     private void OnOutputCellClick(object? sender, DataGridViewCellEventArgs e)
     {
-        if (e.RowIndex >= 0 && outputGrid.Rows[e.RowIndex].Tag is Lexeme lexeme)
+        if (e.RowIndex >= 0 && outputGrid.Rows[e.RowIndex].Tag is Token lexeme)
             NavigateTo(lexeme);
     }
 
     private void OnOutputKeyDown(object? sender, KeyEventArgs e)
     {
-        if (e.KeyCode != Keys.Enter || outputGrid.CurrentRow?.Tag is not Lexeme lexeme) return;
+        if (e.KeyCode != Keys.Enter || outputGrid.CurrentRow?.Tag is not Token lexeme) return;
         e.Handled = true;
         NavigateTo(lexeme);
     }
 
-    private void NavigateTo(Lexeme lexeme)
+    private void NavigateTo(Token lexeme)
     {
         var length = codeEditor.TextLength;
         var offset = Math.Min(lexeme.Offset, length);
